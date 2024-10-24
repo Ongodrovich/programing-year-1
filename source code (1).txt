@@ -1,0 +1,65 @@
+#include <stdio.h>
+#include <string.h>
+
+// Define the structure
+struct book {
+    char title[30];
+    char author[30];
+    int publication_year;
+    char ISBN[14];  // 13 characters + 1 null-terminator
+    float price;
+};
+
+int main() {
+    // i) Declare and initialize the variable
+    struct book myBook = {
+        "Introduction to C Programming",
+        "John Smith",
+        2022,
+        "9780131103627",
+        49.99
+    };
+
+    // ii) Print the values of the fields
+    printf("Book Details:\n");
+    printf("Title: %s\n", myBook.title);
+    printf("Author: %s\n", myBook.author);
+    printf("Publication Year: %d\n", myBook.publication_year);
+    printf("ISBN: %s\n", myBook.ISBN);
+    printf("Price: %.2f\n", myBook.price);
+
+    // iii) Prompt the user to enter the values
+    struct book userBook;
+
+    printf("\nEnter the book details:\n");
+
+    // Clear the input buffer before using fgets to avoid issues after scanf
+    getchar();
+
+    printf("Enter title: ");
+    fgets(userBook.title, sizeof(userBook.title), stdin);
+    userBook.title[strcspn(userBook.title, "\n")] = '\0';  // Remove the newline character
+
+    printf("Enter author: ");
+    fgets(userBook.author, sizeof(userBook.author), stdin);
+    userBook.author[strcspn(userBook.author, "\n")] = '\0';  // Remove the newline character
+
+    printf("Enter publication year: ");
+    scanf("%d", &userBook.publication_year);
+
+    printf("Enter ISBN: ");
+    scanf("%s", userBook.ISBN);
+
+    printf("Enter price: ");
+    scanf("%f", &userBook.price);
+
+    // Print the entered values
+    printf("\nEntered Book Details:\n");
+    printf("Title: %s\n", userBook.title);
+    printf("Author: %s\n", userBook.author);
+    printf("Publication Year: %d\n", userBook.publication_year);
+    printf("ISBN: %s\n", userBook.ISBN);
+    printf("Price: %.2f\n", userBook.price);
+
+    return 0;
+}
